@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book Haven</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .bg {
+            height: 550px;
+            width: 100%;
+            background-color: #c979ff;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            box-shadow: 10px 10px 5px 5px rgb(128, 128, 128);
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 60px;
+            width: 100%;
+            background-color: #c979ff;
+            position: fixed;
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        #logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            font-family: "Cedarville Cursive", cursive;
+        }
+
+        .nav-bar ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 100px;
+        }
+
+        .nav-bar ul li a:hover {
+            transition: 0.7s ease;
+            color: rgb(16, 125, 228);
+        }
+
+        .nav-bar ul li a {
+            text-decoration: none;
+            text-align: center;
+            color: white;
+        }
+
+        #search {
+            right: 0;
+            height: 35px;
+            padding: 10px;
+            border-radius: 10px;
+            width: 0;
+            opacity: 0;
+            transition: width 1s ease, opacity 1s ease;
+            overflow: hidden;
+            background-color: white;
+            color: black;
+            border: 1px solid #ccc;
+        }
+
+        #search.show {
+            width: 200px;
+            opacity: 1;
+        }
+
+        #search-icon {
+            cursor: pointer;
+            color: white;
+            transition: 0.7s ease;
+        }
+
+        #search-icon:hover {
+            transition: 0.7s ease;
+            color: rgb(16, 125, 228);
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding-top: 60px; /* To make space for the fixed nav-bar */
+        }
+
+        #img {
+            height: 400px;
+            margin-right: 40px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .h {
+            color: white;
+            font-size: 40px;
+            margin-bottom: 10px;
+            margin-top: -20px;
+            margin-left: 20px;
+            font-family: "Cedarville Cursive", cursive;
+        }
+
+        .p {
+            color: white;
+            font-size: 1rem;
+            margin-left: 20px;
+            font-family: "Barlow", sans-serif;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        #explore-btn {
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 20px;
+            background-color: rgb(16, 125, 228);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            height: 40px;
+            width: 110px;
+        }
+
+        .exp-section {
+            background-color: #8420c7;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 60px;
+            box-shadow: 10px 10px 5px gray;
+        }
+
+        #hed2 {
+            text-align: center;
+            font-family: "Cedarville Cursive", cursive;
+            font-weight: bold;
+            font-style: normal;
+            padding: 15px;
+            color: white;
+        }
+
+        .booklist-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .book {
+            background-color: white;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            text-align: center;
+            position: relative;
+        }
+
+        .book img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .book-title {
+            color: rgb(112, 111, 111);
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .book button {
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: rgb(16, 125, 228);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            height: 30px;
+            width: 80px;
+        }
+
+        .favorite {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: gold;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+        }
+
+        .book.favorite .favorite {
+            display: block;
+        }
+
+        .add-book-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .add-book-form input {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .add-book-form button {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: rgb(16, 125, 228);
+            color: white;
+            cursor: pointer;
+        }
+
+       
+    </style>
+</head>
+
+<body>
+    <div class="bg" id="home">
+        <nav class="nav-bar">
+            <label id="logo">The Book Haven</label>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#explore">Explore</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact us</a></li>
+            </ul>
+            <div class="search-container">
+                <input id="search" type="search" placeholder="Search">
+                <label id="search-icon"><i class="ri-search-line"></i></label>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <div class="content">
+                <h1 class="h">Expand your mind reading a book</h1>
+                <p class="p">Discover a world of knowledge and adventure in every book you read. Let your<br/>
+                    imagination soar and expand your horizons.</p>
+                <button id="explore-btn">Explore Books</button>
+            </div>
+            <img id="img" src="book.png" alt="Book Image">
+        </div>
+    </div>
+
+    <div class="exp-section" id="explore">
+        <h1 id="hed2">Explore our Books</h1>
+        <div class="booklist-container" id="book-list">
+        
+        </div>
+        <div class="add-book-form">
+            <input type="text" id="new-book-title" placeholder="Book Title">
+            <input type="text" id="new-book-image" placeholder="Book Image URL">
+            <button id="add-book-btn">Add Book</button>
+        </div>
+    </div>
+
+    <script>
+        const searchIcon = document.getElementById("search-icon");
+        const searchInput = document.getElementById("search");
+
+        searchIcon.addEventListener("click", () => {
+            searchInput.classList.toggle("show");
+        });
+
+        const bookList = document.getElementById('book-list');
+        const exploreBtn = document.getElementById('explore-btn');
+        const addBookBtn = document.getElementById('add-book-btn');
+        const newBookTitle = document.getElementById('new-book-title');
+        const newBookImage = document.getElementById('new-book-image');
+
+        let books = [
+            { title: "Sarai's Stripes", image: "image.png", favorite: false },
+            { title: "Ethne Frome", image: "image copy 2.png", favorite: false },
+            { title: "Fallen Vol1", image: "image copy.png", favorite: false },
+            { title: "Mad House", image: "image copy 3.png", favorite: false }
+        ];
+
+        function renderBooks() {
+            bookList.innerHTML = '';
+            books.forEach((book, index) => {
+                const bookItem = document.createElement('div');
+                bookItem.className = `book ${book.favorite ? 'favorite' : ''}`;
+                bookItem.innerHTML = `
+                    <img src="${book.image}" alt="${book.title}">
+                    <div class="book-title">${book.title}</div>
+                    <button onclick="removeBook(${index})">Remove</button>
+                    <i class="ri-star-fill favorite" onclick="toggleFavorite(${index})"></i>
+                `;
+                bookList.appendChild(bookItem);
+            });
+        }
+
+        function addBook() {
+            const title = newBookTitle.value;
+            const image = newBookImage.value;
+
+            if (title && image) {
+                books.push({ title, image, favorite: false });
+                newBookTitle.value = '';
+                newBookImage.value = '';
+                renderBooks();
+            } else {
+                alert('Please enter both title and image URL.');
+            }
+        }
+
+        function removeBook(index) {
+            books.splice(index, 1);
+            renderBooks();
+        }
+
+        function toggleFavorite(index) {
+            books[index].favorite = !books[index].favorite;
+            renderBooks();
+        }
+
+        exploreBtn.addEventListener('click', renderBooks);
+        addBookBtn.addEventListener('click', addBook);
+
+        
+        renderBooks();
+    </script>
+</body>
+</html>
